@@ -1,0 +1,173 @@
+<html lang="en">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="" />
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
+  <meta name="generator" content="Hugo 0.84.0" />
+  <title>Calculadora Volumes</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/product/" />
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <main>
+    <nav class="navbar navbar-light" style="background-color: orange">
+      <a class="navbar-brand" href="#">
+        <img src="img/calculator.png" width="50" height="30" style="padding-left: 20px" />
+        Calculadora de Volumes
+      </a>
+    </nav>
+    <div class="container" style="padding-right: 800px; padding-top: 15px;">
+      <form>
+        <fieldset>
+          <label for="forma">Escolha a forma</label>
+          <select id="forma" class="form-control" onchange="show_div()">
+            <option disabled selected value="">Selecione</option>
+            <option value="cubo">Cubo</option>
+            <option value="bloco">Bloco</option>
+            <option value="cilindro">Cilindro</option>
+            <option value="cone">Cone</option>
+            <option value="esfera">Esfera</option>
+          </select>
+          <div id="div_altura">
+            <label>Altura</label>
+            <input type="text" class="form-control" id="altura" />
+          </div>
+          <div id="div_largura">
+            <label>Largura</label>
+            <input type="text" class="form-control" id="largura" />
+          </div>
+          <div id="div_profundidade">
+            <label>Profundidade</label>
+            <input type="text" class="form-control" id="profundidade" />
+          </div>
+          <div id="div_raio">
+            <label>Raio</label>
+            <input type="text" class="form-control" id="raio" />
+          </div>
+          <div id="div_raiocone">
+            <label>Raio da base</label>
+            <input type="text" class="form-control" id="raiocone" />
+          </div>
+          
+
+        </fieldset>
+      </form>
+      <div class="container" id="resultado" style="padding-right: 350px; font-size: large; font;">
+        <input type="answer" class="form-control" id="output">
+      </div>
+      <div class="container" style="padding-left: 422px;">
+        <button class="btn text-dark" style="background-color: orange" onclick="evento()">
+          <b>Calcular</b>
+        </button>
+        
+      </div>
+
+      </div>
+  </main>
+
+  <script>
+    $("#div_altura").hide('0');
+    $("#div_profundidade").hide('0');
+    $("#div_largura").hide('0');
+    $("#output").hide('0');
+    $("#div_raio").hide('0');
+    $("#div_raiocone").hide('0');
+    $("#cuboimg").hide()
+    function show_div() {
+      forma = $("#forma").val();
+
+      if (forma == "bloco") {
+        $("#cuboimg").hide()
+        $("#div_altura").show();
+        $("#div_profundidade").show();
+        $("#div_largura").show();
+        $("#div_raio").hide();
+        $("#div_raiocone").hide();
+      } else if (forma == "cubo") {
+        $("#div_altura").show();
+        $("#div_profundidade").hide();
+        $("#div_largura").hide();
+        $("#div_raio").hide();
+        $("#div_raiocone").hide();
+
+        $("#div_profundidade").val('0');
+        $("#div_largura").val('0');
+        $("#cuboimg").show()
+      } else {
+        $("#div_altura").hide();
+        $("#div_profundidade").hide();
+        $("#div_largura").hide();
+        
+
+        $("#div_altura").val('0');
+        $("#div_profundidade").val('0');
+        $("#div_largura").val('0');
+      }
+      if (forma == "cilindro") {
+        $("#div_altura").show();
+        $("#div_largura").hide()
+        $("#div_raiocone").hide();
+        
+
+        $("#div_altura").show();
+        $("#div_raio").show();
+      }
+      if (forma == "cone") {
+        $("#div_altura").show();
+        $("#div_raiocone").show();
+        $("#div_raio").hide();
+        
+      } 
+
+      if (forma == "esfera") {
+        $("#div_raio").show();
+        $("#div_altura").hide();
+        $("#div_raiocone").hide('0');
+
+        
+      } else {
+        
+      }
+        
+      
+    }
+
+    function evento() {
+      forma = $("#forma").val();
+      altura = $("#altura").val();
+      profundidade = $("#profundidade").val();
+      largura = $("#largura").val();
+      raio = $("#raio").val()
+      raiocone = $("#raiocone").val();
+
+      if (forma == "cubo") {
+        resultado.innerHTML = "V = " + altura * altura * altura + "m<sup>3</sup>"
+      }
+
+      if (forma == "bloco") {
+        resultado.innerHTML = "V = " + altura * largura * profundidade + "m<sup>3</sup>"
+
+      }
+      if (forma == "cilindro") {
+        resultado.innerHTML = "V = " + (raio * raio) * altura * 3.14159265359 + "m<sup>3</sup>"
+      }
+
+      if (forma == "cone") {
+        resultado.innerHTML = "V = " + (raiocone * raiocone) * altura * (1/3 * 3.14159265359) + "m<sup>3</sup>"
+      }
+
+      if (forma == "esfera") {
+        resultado.innerHTML = "V = " + (4/3 *3.14159265359) * (raio * raio * raio) + "m<sup>3</sup>"
+      }
+
+    }
+  </script>
+</body>
+
+</html>
